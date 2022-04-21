@@ -1,0 +1,58 @@
+{
+  "name": "@ls/ls-ts-cli-1",
+  "version": "1.1.0",
+  "description": "",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:comment": "启动开发环境",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "eslint:comment": "使用 ESLint 检查并自动修复 src 目录下所有扩展名为 .ts 的文件",
+    "eslint": "eslint --fix src --ext .ts --max-warnings=0",
+    "build:comment": "构建",
+    "build": "npm run eslint && npm run prettier && rm -rf lib && tsc --build",
+    "prettier:comment": "自动格式化 src 目录下的所有 .ts 文件",
+    "prettier": "prettier --write \"src/**/*.ts\""
+  },
+  "bin": {
+    "ts-cli": "./bin/ts-cli.js"
+  },
+  "keywords": ["typescript", "cli", "typescript 脚手架", "ts 脚手架", "ts-cli", "脚手架"],
+  "author": "ls",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.25",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.8",
+    "prettier": "^2.6.2",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.6.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run eslint",
+      "npm run prettier"
+    ]
+  },
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "clear-console": "^1.1.0",
+    "commander": "^9.2.0",
+    "inquirer": "^8.2.2",
+    "shelljs": "^0.8.5"
+  },
+  "files": ["package.json", "README.md", "lib"]
+}
